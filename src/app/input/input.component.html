@@ -1,0 +1,14 @@
+<input [formControl]="control"/>
+    <ng-container *ngIf=
+        "control.dirty && 
+        control.touched && 
+        control.errors"
+    >
+        <div *ngIf="control.errors.required">Value is required.</div>
+        <div *ngIf="control.errors.minlength">
+            Value you entered is 
+            {{ control.errors.minlength.actualLength }}
+            but must be
+            {{ control.errors.minlength.requiredLength }}.
+        </div>
+</ng-container>
