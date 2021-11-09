@@ -1,5 +1,9 @@
-<form [formGroup]="cardForm">
+<form [formGroup]="cardForm" (ngSubmit)="onSubmit()">
     <!--fromControlName="name" does not give us access to cardform-->
     <!--passing in entire control object will give us access-->
-    <app-input [control]="cardForm.get('name')"></app-input>
+    <app-input label="Name" [control]="cardForm.get('name')"></app-input>
+    <app-input label="Card Number" [control]="cardForm.get('cardNumber')"></app-input>
+    <app-input label="Expiration" [control]="cardForm.get('expiration')"></app-input>
+    <app-input label="Security Code" [control]="cardForm.get('securityCode')"></app-input>
+    <button class="button is-primary" type="submit" [disabled]="cardForm.invalid">Submit</button>
 </form>
