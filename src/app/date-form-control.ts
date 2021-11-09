@@ -1,7 +1,12 @@
 import { FormControl } from "@angular/forms";
 
 export class DateFormControl extends FormControl {
-    setValue(value: string, options: any) {
+    setValue(value: string | null, options: any) {
+
+        if (!value) {
+            super.setValue('', {...options, emitModelToViewChange: true})
+            return;
+        }
         // regex: if user inputs anything that is *not* 0-9 OR a '/', revert to current value, then break/return
         if (value.match(/[^0-9]|\/]/gi)) {
             super.setValue(this.value, {...options, emitModelToViewChange: true})
@@ -12,7 +17,6 @@ export class DateFormControl extends FormControl {
             super.setValue(this.value, {...options, emitModelToViewChange: true})
             return;
         }
-
 
         // if whatever user is trying to change value to is 2, & current length is 3, allow user to delete/ go back & removes '/'
         if (value.length === 2 && this.value.length === 3) {
